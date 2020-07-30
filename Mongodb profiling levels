@@ -1,0 +1,25 @@
+Mongodb de profiling levels
+Mongo has 3 profiling levels (0,1 and 2).
+Level 0 – No profiling data available
+Level 1 – Slow operations are logged
+Level 2 – All Operations are logged
+ --mevcutta olan profilinglevel
+ db.getProfilingLevel()
+ --yeni profilinglevel set etme
+ db.setProfilingLevel(1)
+ ---3 saniyeden  uzun süren sorguları bize gösterir
+db.currentOp({"secs_running": {$gte: 3}}) 
+db.getProfilingStatus()
+active: sorgunun durumunu gösterir
+secs_running: kaç saniyedir devam ediyor
+query:sorgu 
+
+db.currentOp()
+"query" : {
+  "$query" : {
+    "UniqueId" : "a6f338db7ea728e0",
+    "application_id" : 36530,
+    "class_name" : "Logs"
+  }
+},
+db.custom_data.find({"application_id" : 36530,"class_name" : "Logs","UniqueId" : "a6f338db7ea728e0"}).explain('executionStats')
